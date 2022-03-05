@@ -105,7 +105,7 @@ class Question(models.Model):
     # Foreign key to lesson
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     # question text
-    question = models.CharField(max_length=30)
+    question_text = models.CharField(max_length=30)
     # question grade/mark
     mark = models.IntegerField()
 
@@ -117,6 +117,9 @@ class Question(models.Model):
             return True
         else:
             return False
+
+    def __str__(self):
+        return self.question
 
 
 #  <HINT> Create a Choice Model with:
