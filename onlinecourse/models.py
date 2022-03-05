@@ -119,7 +119,7 @@ class Question(models.Model):
             return False
 
     def __str__(self):
-        return self.question
+        return self.question_text
 
 
 #  <HINT> Create a Choice Model with:
