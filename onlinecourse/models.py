@@ -114,9 +114,9 @@ class Question(models.Model):
         all_answers = self.choice_set.filter(is_correct=True).count()
         selected_correct = self.choice_set.filter(is_correct=True, id__in=selected_ids).count()
         if all_answers == selected_correct:
-            return True, self.mark
+            return all_answers
         else:
-            return False, self.mark
+            return all_answers
 
     def __str__(self):
         return self.question_text

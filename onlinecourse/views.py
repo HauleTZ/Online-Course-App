@@ -157,7 +157,8 @@ def show_exam_result(request, course_id, submission_id):
     total_score = 0
     for choice_object in selected_ids:
         if choice_object.is_correct:
-            grade.append(choice_object.question.mark)
+            all_answers = choice_object.question.is_get_score([choice_object.id])
+            grade.append((choice_object.question.mark)/all_answers)
         
     for l in course.lesson_set.all():
         for q in l.question_set.all():
