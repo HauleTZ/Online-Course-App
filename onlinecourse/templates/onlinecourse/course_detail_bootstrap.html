@@ -78,7 +78,7 @@
             
 
             <!-- A choice submission form example -->
-            <form id="questionform" action="{% url 'onlinecourse:submito %}" method="post">
+            <form id="questionform" action="{% url 'onlinecourse:submit' course.id %}" method="post">
                 {% csrf_token %}
                 {% for lesson in course.lesson_set.all %}
                 {% for question in lesson.question_set.all %}
