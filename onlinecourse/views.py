@@ -156,16 +156,14 @@ def show_exam_result(request, course_id, submission_id):
     over = []
     total_score = 0
     for choice_object in selected_ids:
-        grade.append(choice_object.question.is_get_score([choice_object.id]))
-        over.append(choice_object.question.mark)
-    o = sum(over)       
-  
-    for c,v in grade:
-        if c:
-            total_score = total_score + v
-            
+        if choice_object.is_correct:
+            grade.append(choice_object.question.mark)
         
-    mark = round((total_score/o)*100)
+    for l in course.lesson_set.all():
+        for q in l.question_set.all():
+            over.append(q.mark)             
+
+    mark = round((sum(grade)/sum(over))*100)
         
 
 
@@ -173,8 +171,8 @@ def show_exam_result(request, course_id, submission_id):
     
     context = {
         'course':course,
-        'selected_ids':mark,
-        'grade':mark,
+        'selected_ids': [grade, over],
+        'grade':90,
     }
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
 
